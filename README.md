@@ -1,3 +1,6 @@
+# QueNota
+Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
+
 # README
 
 This README would normally document whatever steps are necessary to get the
