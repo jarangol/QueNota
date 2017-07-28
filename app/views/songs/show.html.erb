@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @song.title %>
+</p>
+
+<p>
+  <strong>Release:</strong>
+  <%= @song.release %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @song.url %>
+</p>
+
+<p>
+  <strong>Singer:</strong>
+  <%= @song.singer %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @song.album %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @song.genre %>
+</p>
+
+<p>
+  <strong>Privacity:</strong>
+  <%= @song.privacity %>
+</p>
+
+<strong>Rating:</strong>
+<%= @posts.ratings.group(:star).count %>
+<%= form_for @posts do |f| %>
+    <% (1..5).each do |rating| %>
+
+        <%= radio_button_tag "post[rating_ids][]", rating %>
+        <%= rating %>
+
+<% end %>
+
+<%= f.submit('Rate') %>
+<% end %>
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>

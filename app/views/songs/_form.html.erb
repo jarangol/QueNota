@@ -1,0 +1,52 @@
+<%= form_with(model: song, local: true) do |form| %>
+  <% if song.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(song.errors.count, "error") %> prohibited this song from being saved:</h2>
+
+      <ul>
+      <% song.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :song_title, class: "form-control"  %>
+  </div>
+
+  <div class="field", class="form-control" >
+    <%= form.label :release %>
+    <%= form.date_select :release, id: :song_release %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url, id: :song_url, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :singer_id %>
+    <%= form.text_field :singer_id, id: :song_singer_id, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :album_id %>
+    <%= form.text_field :album_id, id: :song_album_id, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :genre_id %>
+    <%= form.text_field :genre_id, id: :song_genre_id, class: "form-control"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :privacity %>
+    <%= form.number_field :privacity, id: :song_privacity, class: "form-control"  %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
