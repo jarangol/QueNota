@@ -54,8 +54,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # front-end style
-gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'sprockets-rails','~> 3.2.0', :require => 'sprockets/railtie'
 gem 'jquery-rails'
-gem 'ratyrate' # rating posts functionality
 gem 'devise' # user authorization management
+gem 'ratyrate' #posts rating
+gem 'jquery-turbolinks'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'letsrate'

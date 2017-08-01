@@ -26,6 +26,7 @@
     <%= form.text_field :url, id: :song_url, class: "form-control"  %>
   </div>
 
+
   <div class="field">
     <%= form.label :singer_id %>
     <%= form.collection_select(:singer_id, Singer.all, :id, :name,
@@ -51,6 +52,11 @@
     <%= form.label :privacity %>
     <%= form.number_field :privacity, {in: 0..2, id: :song_privacity, class: "form-control"}  %>
   </div>
+
+<%= form_with(model: song, local: true) do |f|%>
+<%=  f.select("rating", "rate") %>
+<%  f.number_field :rating, {in: 0..5, id: :song_rating, class: "form-control"}   %>
+<%end%>
 
   <div class="actions">
   <%= form.submit %>

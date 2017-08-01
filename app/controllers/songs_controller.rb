@@ -10,6 +10,7 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
+    @user = User.find_by(id: @song.user_id)
   end
 
   # GET /songs/new
@@ -25,7 +26,7 @@ class SongsController < ApplicationController
   # POST /songs.json
   def create
     @song = Song.new(song_params)
-
+    @song.user_id = current_user.id
     respond_to do |format|
       if @song.save
         format.html { redirect_to @song, notice: 'Song was successfully created.' }
@@ -41,7 +42,7 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1.json
   def update
     respond_to do |format|
-      @song.ratings.create(:rate => params[:song][:rating_ids][0].to_i)
+      #@song.ratings.create(:rate => params[:song][:rating_ids][0].to_i)
       if @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }

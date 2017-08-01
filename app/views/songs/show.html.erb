@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @song.title %>
@@ -35,8 +33,11 @@
   <%= @song.privacity %>
 </p>
 
-<strong>Rating:</strong>
-<%= rating_for @song, 'title' %>
+<p>
+  <strong>User:</strong>
+  <%= @user.email %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_song_path(@song) %> |
