@@ -17,17 +17,17 @@
 
 <p>
   <strong>Singer:</strong>
-  <%= @song.singer %>
+  <%= @song.singer.name %>
 </p>
 
 <p>
   <strong>Album:</strong>
-  <%= @song.album %>
+  <%= @song.album.name %>
 </p>
 
 <p>
   <strong>Genre:</strong>
-  <%= @song.genre %>
+  <%= @song.genre.name %>
 </p>
 
 <p>
@@ -36,17 +36,8 @@
 </p>
 
 <strong>Rating:</strong>
-<%= @posts.ratings.group(:star).count %>
-<%= form_for @posts do |f| %>
-    <% (1..5).each do |rating| %>
+<%= rating_for @song, 'title' %>
 
-        <%= radio_button_tag "post[rating_ids][]", rating %>
-        <%= rating %>
-
-<% end %>
-
-<%= f.submit('Rate') %>
-<% end %>
 
 <%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'Back', songs_path %>

@@ -28,25 +28,31 @@
 
   <div class="field">
     <%= form.label :singer_id %>
-    <%= form.text_field :singer_id, id: :song_singer_id, class: "form-control"  %>
+    <%= form.collection_select(:singer_id, Singer.all, :id, :name,
+        {:prompt => 'Please select the singer of this song'},
+        {id: :song_singer_id, class: "form-control"} ) %>
   </div>
 
   <div class="field">
     <%= form.label :album_id %>
-    <%= form.text_field :album_id, id: :song_album_id, class: "form-control"  %>
+    <%= form.collection_select(:album_id, Album.all, :id, :name,
+        {:prompt => 'Please select the album of this song'},
+        {id: :song_album_id, class: "form-control"} ) %>
   </div>
 
   <div class="field">
     <%= form.label :genre_id %>
-    <%= form.text_field :genre_id, id: :song_genre_id, class: "form-control"  %>
+    <%= form.collection_select(:genre_id, Genre.all, :id, :name,
+        {:prompt => 'Please select the genre of this song'},
+        {id: :song_genre_id, class: "form-control"} ) %>
   </div>
 
   <div class="field">
     <%= form.label :privacity %>
-    <%= form.number_field :privacity, id: :song_privacity, class: "form-control"  %>
+    <%= form.number_field :privacity, {in: 0..2, id: :song_privacity, class: "form-control"}  %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+  <%= form.submit %>
   </div>
 <% end %>

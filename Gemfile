@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'sprockets-rails','~> 3.2.0', :require => 'sprockets/railtie'
 gem 'jquery-rails'
+gem 'ratyrate' # rating posts functionality
+gem 'devise' # user authorization management

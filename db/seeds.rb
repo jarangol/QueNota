@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Singer.new(id:1,name:"1")
-Album.new(id:1,name:"1")
-Genre.new(id:1,name:"1")
+Album.create(name:"Album",year: DateTime.new(2009))
+Genre.create(name:"Genre")
+Singer.create(name:"Singer")

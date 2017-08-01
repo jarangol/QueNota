@@ -41,6 +41,7 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1.json
   def update
     respond_to do |format|
+      @song.ratings.create(:rate => params[:song][:rating_ids][0].to_i)
       if @song.update(song_params)
         format.html { redirect_to @song, notice: 'Song was successfully updated.' }
         format.json { render :show, status: :ok, location: @song }
@@ -69,6 +70,7 @@ class SongsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def song_params
-      params.require(:song).permit(:title, :release, :url, :singer_id, :album_id, :genre_id, :privacity)
+      params.require(:song).permit(:title, :release, :url, :singer_id, :album_id,
+       :genre_id, :privacity,rating_ids:[])
     end
 end
