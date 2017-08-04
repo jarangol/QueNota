@@ -1,8 +1,5 @@
 <h1>Songs</h1>
 
-<%= link_to 'New', new_song_path, class:"btn btn-lg btn-primary btn-lg" %>
-
-
 <table class="table">
   <thead>
     <tr>
@@ -22,7 +19,7 @@
       <tr>
         <td><%= song.title %></td>
         <td><%= song.release %></td>
-        <td><%= song.url %></td>
+        <td><%= song.song_url %></td>
         <td><%= song.singer.name %></td>
         <td><%= song.album.name %></td>
         <td><%= song.genre.name %></td>
@@ -34,8 +31,4 @@
     <% end %>
   </tbody>
 </table>
-
-
-
-
-<br>
+<%= link_to 'New', new_song_path, class:"btn btn-lg btn-primary" %>

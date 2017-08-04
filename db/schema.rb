@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170803042537) do
     t.integer "singer_id"
     t.integer "album_id"
     t.integer "genre_id"
-    t.integer "privacity"
+    t.integer "privacity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
