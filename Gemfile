@@ -60,5 +60,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'jquery-rails'
 gem 'devise' # user authorization management
 gem 'bootstrap-sass', '~> 3.3.6'
-
 gem 'activevalidators', '~> 4.0.1' # <-- mind the patch version
+gem 'materialize-sass'

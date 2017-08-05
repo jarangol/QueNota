@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+
   devise_for :users
+  get 'users/profile', to: 'users#profile'
+
   root to: 'songs#index'
-  # 
+  #
   # #display a list of all songs
   # get '/songs', to: 'songs#index', as: 'songs'
   # # return an HTML form for creating a new song

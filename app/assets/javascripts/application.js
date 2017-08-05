@@ -12,9 +12,10 @@
 //
 
 //= require jquery
-//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
 
 //= require_tree
 //= require rails-ujs
+//= require materialize-sprockets
+//= require bootstrap-sprockets

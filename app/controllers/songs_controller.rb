@@ -4,7 +4,11 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all
+    if !user_signed_in?
+      @songs = Song.where(privacity:0)
+    else
+      @songs = Song.where.not(privacity:2)
+    end
   end
 
   # GET /songs/1
