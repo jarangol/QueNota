@@ -9,9 +9,6 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  host: localhost
-  username: julian
-  password: "juda368*"
 
 development:
   <<: *default
@@ -27,5 +24,6 @@ test:
 production:
   <<: *default
   database: Quenota_production
-  username: quenota
+  username: julian
+  #username: quenota
   password: <%= ENV['QUENOTA_DATABASE_PASSWORD'] %>
