@@ -26,4 +26,4 @@ production:
   database: Quenota_production
   username: julian
   #username: quenota
-  password: <%= ENV['QUENOTA_DATABASE_PASSWORD'] %>
+  password: juda368*
