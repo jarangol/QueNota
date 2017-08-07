@@ -29,7 +29,7 @@ Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
 
 source: https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-with-rbenv-on-centos-7
 
-Teacher's repository: https://github.com/st0263eafit/rubyArticulosEM
+Teacher's repository: https://github.com/st0263eafit/QueNota
 
 * Conectarse al servidor remotamente (Ejemplo via ssh).
 
@@ -158,4 +158,48 @@ Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capis
 *** Guide to install Nginx:
   $ passenger-install-nginx-module
 
-*** Setup Nginx:
+*** configure the ruby rails app to use passenger
+Source: (https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/ownserver/apache/oss/el7/deploy_app.html):
+
+****summary:
+
+      - clone the repo to /var/www/myapp/QueNota
+
+      user1@prod$ cd /var/www/myapp/QueNota
+
+      user1@prod$ bundle install --deployment --without development test
+
+****Configure database.yml and secrets.yml:
+
+      Generate the key: user1@prod$ bundle exec rake secret
+
+      and put it in:
+      user1@prod$ nano config/secrets.yml
+
+      production:
+        secret_key_base: <the value that you copied from 'rake secret'>
+
+      user1@prod$ bundle exec rake assets:precompile db:migrate
+
+      add this to /etc/httpd/conf.d/QueNota.conf:
+
+      <VirtualHost *:80>
+          ServerName  <your_server_ip>
+
+          # Tell Apache and Passenger where your app's 'public' directory is
+          DocumentRoot /var/www/myapp/QueNota/public
+
+          PassengerRuby /home/user1/.rvm/gems/ruby-2.4.1/wrappers/ruby
+
+          # Relax Apache security settings
+          <Directory /var/www/myapp/QueNota/public>
+              Allow from all
+              Options -MultiViews
+              # Uncomment this if you're on Apache >= 2.4:
+              #Require all granted
+          </Directory>
+      </VirtualHost>
+
+    restart httpd
+
+      user1@prod$ sudo systemctl restart httpd
