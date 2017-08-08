@@ -28,8 +28,8 @@ Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
 
  * Instalaciones previas:
   * rvm:
-    *$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E37D2BAF1CF37B13E2069D6956105BD0E739499BDB
-    *$ \curl -sSL https://get.rvm.io | bash
+    * $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E37D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    * $ \curl -sSL https://get.rvm.io | bash
 
   * Ruby 2.4.1: $ rvm install 2.4.1
 
@@ -54,53 +54,51 @@ Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
     * Change this file:
       $ sudo nano /var/lib/pgsql/data/pg_hba.conf
 
-  original:
+        # original:
 
-  host    all             all             127.0.0.1/32            ident
-  host    all             all             ::1/128                 ident
+          host    all             all             127.0.0.1/32            ident
+          host    all             all             ::1/128                 ident
 
-  updated:
+        # updated:
 
-  host    all             all             127.0.0.1/32            md5
-  host    all             all             ::1/128                 md5
+          host    all             all             127.0.0.1/32            md5
+          host    all             all             ::1/128                 md5
 
-  #run postgres:
+    * run postgres:
+        * $ sudo systemctl start postgresql
+        * $ sudo systemctl enable postgresql
 
-    $ sudo systemctl start postgresql
-    $ sudo systemctl enable postgresql
+    * Create Database User:
 
-  #Create Database User:
+      * $ sudo su - postgres
 
-    *$ sudo su - postgres
+      * $ createuser -s <pguser>
 
-    *$ createuser -s <pguser>
+      * $ psql
 
-    *$ psql
+      * postgres=# \password <pguser>
 
-    *postgres=# \password <pguser>
+      * Enter new passwordS
 
-    *Enter new passwordS
-
-    *postgres=# \q
-
-
-* Database creation:
-  * Whithout seed data:
-    $ rake db:create
-
-  * Database initialization
-    $ rake db:seed
+      * postgres=# \q
 
 
-*Setup RAILS_ENV and PORT (3000 for dev, 4000 for testing or 5000 for production)
-  $ export RAILS_ENV=test
-  $ export PORT=4000
+    * Database creation:
+        $ rake db:create
 
-  *open PORT on firewalld service:
+    * Database initialization
+        $ rake db:seed
+
+
+ * Setup RAILS_ENV and PORT (3000 for dev, 4000 for testing or 5000 for production)
+    $ export RAILS_ENV=test
+    $ export PORT=4000
+
+ * open PORT on firewalld service:
     $ sudo firewall-cmd --zone=public --add-port=4000/tcp --permanent
     $ sudo firewall-cmd --reload
 
-*clone de git repo, install and run:
+ * clone de git repo, install and run:
 
         $ mkdir apps
         $ cd apps
@@ -112,12 +110,12 @@ Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
         $ export PORT=3001
         $ rails server
 
-7.Making it run permanently:
-Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capistrano/postgresql/2016/01/10/deploying-ror-on-digitalocean.html
+4 .Making it run permanently:
+  * Source : http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capistrano/postgresql/2016/01/10/deploying-ror-on-digitalocean.html
 
-  *SETUP Centos 7.1 in production:
+  * SETUP Centos 7.1 in production:
 
-  *With Apache Web Server and Passenger.
+  * With Apache Web Server and Passenger.
 
       $ sudo yum install httpd
       $ sudo systemctl enable httpd
@@ -128,19 +126,16 @@ Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capis
   * Install Yarn (CentOS / Fedora / RHEL):
     Source:https://yarnpkg.com/en/docs/install
 
-  On CentOS, Fedora and RHEL, you can install Yarn via our RPM package repository.
+    $  sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
 
-  sudo wget https://dl.yarnpkg.com/rpm/yarn.repo -O /etc/yum.repos.d/yarn.repo
+  ## If you do not already have Node.js installed, you should also configure the NodeSource repository:
+    * $ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
-  If you do not already have Node.js installed, you should also configure the NodeSource repository:
-  curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-
-  Then you can simply:
-
-  sudo yum install yarn OR sudo dnf install yarn
+  ## Then you can simply:
+    $ sudo yum install yarn OR sudo dnf install yarn
 
 
-  *Install Phusion Passenger and Nginx:
+  * Install Phusion Passenger and Nginx:
     * Install Passenger:
       $ gem install passenger
     * Guide to install Nginx:
@@ -149,27 +144,27 @@ Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capis
   * configure the ruby rails app to use passenger
       Source: (https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/ownserver/apache/oss/el7/deploy_app.html):
 
-    *summary:
+    * summary:
 
-      *- clone the repo to /var/www/myapp/QueNota
+      * $clone the repo to /var/www/myapp/QueNota
 
-      *$ cd /var/www/myapp/QueNota
+      * $ cd /var/www/myapp/QueNota
 
-      *$ bundle install --deployment --without development test
+      * $ bundle install --deployment --without development test
 
-    *Configure database.yml and secrets.yml:
+    * Configure database.yml and secrets.yml:
 
-      Generate the key: $ bundle exec rake secret
+      * Generate the key: $ bundle exec rake secret
 
-      and put it in:
-      $ nano config/secrets.yml
+      ## and put it in:
+      * $ nano config/secrets.yml
 
-      production:
+       production:
         secret_key_base: <the value that you copied from 'rake secret'>
 
-      $ bundle exec rake assets:precompile db:migrate
+      * $ bundle exec rake assets:precompile db:migrate
 
-      add this to /etc/httpd/conf.d/QueNota.conf:
+      ## add this to /etc/httpd/conf.d/QueNota.conf:
 
       <VirtualHost *:3001>
           ServerName  <your_server_ip>
@@ -188,6 +183,6 @@ Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capis
           </Directory>
       </VirtualHost>
 
-      $ restart httpd
+      * $ restart httpd
 
-      $ sudo systemctl restart httpd
+      * $ sudo systemctl restart httpd
