@@ -19,16 +19,21 @@ Los usuarios podrán navegar por la página y las diferentes secciones, clasific
 
 
   1.1 La base de datos cuenta con los siguientes modelos y relaciones:
+
     1.1.1 Singer:
       * name: string
+
     1.1.2 Album:
       * name: string
       * year: date
+
     1.1.3 Genre:
       * name: string
+
     1.1.4 Rating
       * rate: integer # calificacion de 0 a 5 para la canción.
       * song_id: integer
+
     1.1.5 Song:
         * title: string
         * release: date
@@ -38,7 +43,9 @@ Los usuarios podrán navegar por la página y las diferentes secciones, clasific
         * genre_id: integer
         * privacity: integer (0: public, 1:shared, 2:private)
         * user_id: integer
+
   1.2 REST ROUTES
+
       1.2.1 Descripción: Lista de todas las canciones según la privacidad otorgada
                          o permitida por el usuario.
             Método: GET
