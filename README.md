@@ -19,17 +19,17 @@ Los usuarios podrán navegar por la página y las diferentes secciones, clasific
 
 
   1.1 La base de datos cuenta con los siguientes modelos y relaciones:
-    * Singer:
+    1.1.1 Singer:
       * name: string
-    * Album:
+    1.1.2 Album:
       * name: string
       * year: date
-    * Genre:
+    1.1.3 Genre:
       * name: string
-    * Rating
+    1.1.4 Rating
       * rate: integer # calificacion de 0 a 5 para la canción.
       * song_id: integer
-    * Song:
+    1.1.5 Song:
         * title: string
         * release: date
         * "song_url": string
