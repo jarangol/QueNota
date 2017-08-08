@@ -5,12 +5,12 @@ Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
 
 1.Implementación realizada como proyecto de la materia, en los ambientes:
 
-+Desarrollo:
+*Desarrollo:
 
 
-+Test:
+*Test:
 
-+Producción:
+*Producción:
 
 
 
@@ -34,37 +34,33 @@ Teacher's repository: https://github.com/st0263eafit/QueNota
 * Conectarse al servidor remotamente (Ejemplo via ssh).
 
 *Instalaciones previas:
+  * rvm:
+    *$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E37D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    *$ \curl -sSL https://get.rvm.io | bash
 
-** rvm:
+  * Ruby 2.4.1: $ rvm install 2.4.1
 
-user1@test$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E37D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  *Rails gem: $ gem install rails -v 5.1.2
 
-user1@test$ \curl -sSL https://get.rvm.io | bash
+  *Javascript runtime:
 
-***Ruby 2.4.1:
-  user1@test$ rvm install 2.4.1
+    #Node:
+      sudo yum install nodejs
 
-***Rails gem:
-    user1@test$ gem install rails -v 5.1.2
+*Instalar postgres:
 
-***Javascript runtime:
+  #Add Epel yum repostory (If you haven't done it):
+    sudo yum -y install epel-release
 
-  #Node:
-    sudo yum install nodejs
+  #Install PostgreSQL server and its development libraries:
+    sudo yum install postgresql-server postgresql-contrib postgresql-devel
 
-**Instalar postgres:
-
-#Add Epel yum repostory (If you haven't done it):
-  sudo yum -y install epel-release
-
-#Install PostgreSQL server and its development libraries:
-  sudo yum install postgresql-server postgresql-contrib postgresql-devel
-
-#Create a new PostgreSQL database cluster:
+  #Create a new PostgreSQL database cluster:
     sudo postgresql-setup initdb
 
-#Change this file:
+  #Change this file:
     $ sudo nano /var/lib/pgsql/data/pg_hba.conf
+
 
   original:
 
@@ -76,67 +72,69 @@ user1@test$ \curl -sSL https://get.rvm.io | bash
   host    all             all             127.0.0.1/32            md5
   host    all             all             ::1/128                 md5
 
-#run postgres:
+  #run postgres:
 
-user1@test$ sudo systemctl start postgresql
-user1@test$ sudo systemctl enable postgresql
+    $ sudo systemctl start postgresql
+    $ sudo systemctl enable postgresql
 
-#Create Database User:
+  #Create Database User:
 
-  user1@test$ sudo su - postgres
+    *$ sudo su - postgres
 
-  user1@test$ createuser -s <pguser>
+    *$ createuser -s <pguser>
 
-  user1@test$ psql
+    *$ psql
 
-  postgres=# \password <pguser>
-  Enter new passwordS
-  postgres=# \q
+    *postgres=# \password <pguser>
+
+    *Enter new passwordS
+
+    *postgres=# \q
 
 
-** Database creation:
-  ** Whithout seed data:
+* Database creation:
+  * Whithout seed data:
     $ rake db:create
 
   * Database initialization
     $ rake db:seed
 
 
-**Setup RAILS_ENV and PORT (3000 for dev, 4000 for testing or 5000 for production)
-user1@test$ export RAILS_ENV=test
-user1@test$ export PORT=4000
+*Setup RAILS_ENV and PORT (3000 for dev, 4000 for testing or 5000 for production)
+  $ export RAILS_ENV=test
+  $ export PORT=4000
 
-**open PORT on firewalld service:
-    user1@test$ sudo firewall-cmd --zone=public --add-port=4000/tcp --permanent
-    user1@test$ sudo firewall-cmd --reload
+  *open PORT on firewalld service:
+    $ sudo firewall-cmd --zone=public --add-port=4000/tcp --permanent
+    $ sudo firewall-cmd --reload
 
-**clone de git repo, install and run:
+*clone de git repo, install and run:
 
-        user1@test$ mkdir apps
-        user1@test$ cd apps
-        user1@test$ git clone https://github.com/jarangol/QueNota.git
-        user1@test$ cd QueNota
-        user1@test$ bundle install
-        user1@test$ rake db:reset
-        user1@test$ export RAILS_ENV=test
-        user1@test$ export PORT=3001
-        user1@test$ rails server
+        $ mkdir apps
+        $ cd apps
+        $ git clone https://github.com/jarangol/QueNota.git
+        $ cd QueNota
+        $ bundle install
+        $ rake db:reset
+        $ export RAILS_ENV=test
+        $ export PORT=3001
+        $ rails server
 
 7.Making it run permanently:
 Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capistrano/postgresql/2016/01/10/deploying-ror-on-digitalocean.html
 
-*SETUP Centos 7.1 in production:
+  *SETUP Centos 7.1 in production:
 
-**With Apache Web Server and Passenger.
+  *With Apache Web Server and Passenger.
 
-      user1@prod$ sudo yum install httpd
-      user1@prod$ sudo systemctl enable httpd
-      user1@prod$ sudo systemctl start httpd
+      $ sudo yum install httpd
+      $ sudo systemctl enable httpd
+      $ sudo systemctl start httpd
 
       test in a browser: http://<your_server_ip>
 
-** Install Yarn (CentOS / Fedora / RHEL):
- Source:https://yarnpkg.com/en/docs/install
+  * Install Yarn (CentOS / Fedora / RHEL):
+    Source:https://yarnpkg.com/en/docs/install
 
   On CentOS, Fedora and RHEL, you can install Yarn via our RPM package repository.
 
@@ -152,34 +150,34 @@ Source: http://tohyongcheng.github.io/learn/ruby%20on%20rails/digitalocean/capis
   sudo dnf install yarn
 
 
-**Install Phusion Passenger and Nginx:
-*** Install Passenger:
+*Install Phusion Passenger and Nginx:
+  * Install Passenger:
     gem install passenger
-*** Guide to install Nginx:
+  * Guide to install Nginx:
   $ passenger-install-nginx-module
 
-*** configure the ruby rails app to use passenger
+  * configure the ruby rails app to use passenger
 Source: (https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/ownserver/apache/oss/el7/deploy_app.html):
 
-****summary:
+    *summary:
 
-      - clone the repo to /var/www/myapp/QueNota
+      *- clone the repo to /var/www/myapp/QueNota
 
-      user1@prod$ cd /var/www/myapp/QueNota
+      *$ cd /var/www/myapp/QueNota
 
-      user1@prod$ bundle install --deployment --without development test
+      *$ bundle install --deployment --without development test
 
-****Configure database.yml and secrets.yml:
+    *Configure database.yml and secrets.yml:
 
-      Generate the key: user1@prod$ bundle exec rake secret
+      Generate the key: $ bundle exec rake secret
 
       and put it in:
-      user1@prod$ nano config/secrets.yml
+      $ nano config/secrets.yml
 
       production:
         secret_key_base: <the value that you copied from 'rake secret'>
 
-      user1@prod$ bundle exec rake assets:precompile db:migrate
+      $ bundle exec rake assets:precompile db:migrate
 
       add this to /etc/httpd/conf.d/QueNota.conf:
 
@@ -202,4 +200,4 @@ Source: (https://www.phusionpassenger.com/library/walkthroughs/deploy/ruby/ownse
 
     restart httpd
 
-      user1@prod$ sudo systemctl restart httpd
+      $ sudo systemctl restart httpd
