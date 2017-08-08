@@ -1,16 +1,191 @@
 # QueNota
-Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
+Aplicación con MVN para tópicos especiales en telemática Universidad EAFI*
 
-# README
+La aplicación va a permitir a los usuarios registrados compartir sus canciones preferidas, cada una clasificada por género, artista y fecha de lanzamiento. Se presenta la posibilidad de puntuar entre 1-5 cada canción publicada para que se permita clasificarlas adicionalmente según la puntuación.
+
+Por la forma del diseño visual y logístico de los permisos, los usuarios que no estén registrados y respectivamente logueados, solo podrán ver el contenido público o los rankings.
+
+Y la puntuación de sus publicaciones también podrá influir en la reputación del usuario.
+
+Los usuarios podrán navegar por la página y las diferentes secciones, clasificaciones o listados. Además podrán buscar y compartir contenido. Todo lo anterior va ligado a la privacidad de las publicaciones, esto significa que pueden ser públicas o privadas, a elección del usuario.
+
+
+# Desarrollo e Instalación:
 
 1.Implementación realizada como proyecto de la materia, en los ambientes:
 
-  * Desarrollo:
+  * Desarrollo: la implementacion se llevo a cabo con Ruby on Rails. Utilizando
+  la plantilla generada para una aplicación con arquitectura MVC.
 
 
-  * Test:
+  1.1 La base de datos cuenta con los siguientes modelos y relaciones:
+    * Singer:
+      * name: string
+    * Album:
+      * name: string
+      * year: date
+    * Genre:
+      * name: string
+    * Rating
+      * rate: integer # calificacion de 0 a 5 para la canción.
+      * song_id: integer
+    * Song:
+        * title: string
+        * release: date
+        * "song_url": string
+        * singer_id: integer
+        * album_id: integer
+        * genre_id: integer
+        * privacity: integer (0: public, 1:shared, 2:private)
+        * user_id: integer
+  1.2 REST ROUTES
+      1.2.1 Descripción: Lista de todas las canciones según la privacidad otorgada
+                         o permitida por el usuario.
+            Método: GET
+            URI: /songs
+            Representación de datos:
+              Datos Response:
+                  * Datos HTML: tabla con las canciones consultadas.
+
+      1.2.2 Descripción: Página para crear una nueva canción.
+            Método: GET
+            URI: /photos/new
+            Representación de datos:
+
+              Datos Response:
+                  * Datos HTML: Los datos de la nueva canción
+
+     1.2.3 Descripción: Crear una nueva foto.
+           Método: POST
+           URI: /songs
+           Representación de datos:
+             Datos Request:
+              :title = string con el titulo
+              :release = date del lanzamiento (año)
+              :song_url = url para escucharla
+              :singer_id = id cantante
+              :album_id = id album
+              :genre_id = id genero
+              :privacity = numero de 0-2 para la privacidad.
+
+              Datos Response:
+                   * Datos HTML: Formulario para una nueva entrada de canción.
+
+     1.2.4 Descripción: mostrar una cancion especifica.
+           Método: GET
+           URI: /photos/:id
+           Representación de datos:
+             Datos Response:
+                 * Datos HTML: Los datos de la canción con el id especificado.
+
+     1.2.5 Descripción: editar una canción especifica.
+           Método: GET
+           URI: /photos/:id/edit
+           Representación de datos:
+             Datos Response:
+                 * Datos HTML: Formulario para editar.   
+
+     1.2.6 Descripción: Actalizar una canción específica.
+              Método: PATCH/PUT
+              URI: /photos/:id
+              Representación de datos:
+                Datos Request:
+                 :title = string con el titulo
+                 :release = date del lanzamiento (año)
+                 :song_url = url para escucharla
+                 :singer_id = id cantante
+                 :album_id = id album
+                 :genre_id = id genero
+                 :privacity = numero de 0-2 para la privacidad.
+
+                Datos Response:
+                    * Datos HTML: Formulario para editar.   
+
+     1.2.7 Descripción: borrar una canción especifica.
+           Método: DELETE
+           URI: /photos/:id
+
+
+     1.2.8 Descripción: Iniciar sesion
+           Método: GET
+           URI: /users/sign_in
+           Representación de datos:
+             Datos Response:
+                 * Datos HTML: Formulario de acceso
+
+     1.2.9 Descripción: Cerrar sesion
+           Método: DELETE
+           URI: /users/sign_out
+           Representación de datos:
+             * Datos Request:
+                email:
+                password:
+      1.2.10 Descripción: Cambiar contraseña
+            Método: GET
+            URI: /users/password/new
+            Representación de datos:
+              Datos Response:
+                  * Datos HTML: Formulario de cabiar la contraseña
+
+      1.2.11 Descripción: Cambiar contraseña
+            Método: PATCH
+            URI: /users/password
+            Representación de datos:
+              Datos Request::
+                email:
+                password:
+
+      1.2.12 Descripción: nuevo usuario
+            Método: GET
+            URI: /users/sign_up
+            Representación de datos:
+            Datos Response:
+                * Datos HTML: Formulario de registro
+
+      1.2.13 Descripción: Actualizar perfil.
+            Método: PATCH/PUT
+            URI: /users
+            Representación de datos:
+               Datos Request:
+                email:
+                password:
+
+        1.2.14 Descripción: Borrar usuario.
+              Método: DELETE
+              URI: /users
+              Representación de datos:
+                 Datos Request:
+                  id:
+
+        1.2.15 Descripción: Crear usuario.
+              Método: POST
+              URI: /users
+              Representación de datos:
+                 Datos Request:
+                  email:
+                  contraseña:
+
+
+        1.2.16 Descripción: consultar perfil.
+              Método: GET
+              URI: /users/profile
+              Representación de datos:
+              Datos Response:
+                  * Datos HTML: Lista de las canciones del usuario.
+
+
+
+  * Test: DCA Located at EAFIT UNIVERSITY. It needs VPN access to the platform.
+      The steps that I have followed are in the 4 step o this readme.
+
+      http://10.131.137.238:3000/
 
   * Producción:
+    https://quenotaj.herokuapp.com/
+
+    I have followed this tutorial : https://devcenter.heroku.com/articles/getting-started-with-ruby#set-up
+    In which I learnt how to create and deploy a Rails application with Heroku.
+
 
 2.Especificaciones técnicas:
 
@@ -29,7 +204,7 @@ Aplicación con MVN para tópicos especiales en telemática Universidad EAFIT.
  * Instalaciones previas:
   * rvm:
     * $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E37D2BAF1CF37B13E2069D6956105BD0E739499BDB
-    * $ \curl -sSL https://get.rvm.io | bash
+    * $ \curl -sSL https://ge* rvm.io | bash
 
   * Ruby 2.4.1: $ rvm install 2.4.1
 
